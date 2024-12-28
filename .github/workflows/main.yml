@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Race</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      margin: 0;
+    }
+
+    #game-container {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #leaderboard {
+      margin-top: 20px;
+    }
+
+    ol {
+      text-align: left;
+      margin: 0 auto;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <h1>Career Race</h1>
+    <div id="player-info">
+      <h2>Rank: <span id="rank">Bronze</span></h2>
+      <button id="connect">Connect with Players</button>
+    </div>
+    <div id="challenge">
+      <h3>Answer the question:</h3>
+      <p id="question">What is the most important skill for a software engineer?</p>
+      <button onclick="submitAnswer('Creativity')">Creativity</button>
+      <button onclick="submitAnswer('Leadership')">Leadership</button>
+      <button onclick="submitAnswer('Problem Solving')">Problem Solving</button>
+      <button onclick="submitAnswer('Networking')">Networking</button>
+    </div>
+    <div id="leaderboard">
+      <h2>Leaderboard</h2>
+      <ol id="leaderboard-list"></ol>
+    </div>
+  </div>
+
+  <script>
+    let players = [];
+    let player = {
+      id: "Player1", // In a real implementation, this would be unique
+      rank: "Bronze",
+      points: 0
+    };
+
+    function updateRank() {
+      if (player.points >= 50 && player.points < 100) {
+        player.rank = "Silver";
+      } else if (player.points >= 100 && player.points < 200) {
+        player.rank = "Platinum";
+      } else if (player.points >= 200 && player.points < 300) {
+        player.rank = "Gold";
+      } else if (player.points >= 300) {
+        player.rank = "Diamond";
+      }
+      document.getElementById("rank").innerText = player.rank;
+    }
+
+    function submitAnswer(answer) {
+      const correctAnswer = "Problem Solving"; // For simplicity
+      if (answer === correctAnswer) {
+        alert("Correct!");
+        player.points += 10;
+      } else {
+        alert("Incorrect!");
+        player.points -= 5;
+      }
+      updateRank();
+      updateLeaderboard();
+    }
+
+    function updateLeaderboard() {
+      // Add player to leaderboard (simulated for now)
+      if (!players.find(p => p.id === player.id)) {
+        players.push(player);
+      }
+      const leaderboard = document.getElementById("leaderboard-list");
+      leaderboard.innerHTML = "";
+      players.sort((a, b) => b.points - a.points).forEach(p => {
+        const li = document.createElement("li");
+        li.innerText = `${p.id}: ${p.points} points (${p.rank})`;
+        leaderboard.appendChild(li);
+      });
+    }
+
+    document.getElementById("connect").addEventListener("click", () => {
+      alert("Simulating connection to other players...");
+    });
+
+    updateLeaderboard(); // Initialize the leaderboard
+  </script>
+</body>
+</html>
