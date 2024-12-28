@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Race</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="game-container">
+    <h1>Career Race</h1>
+    <div id="player-info">
+      <h2>Rank: <span id="rank">Bronze</span></h2>
+      <button id="connect">Connect with Players</button>
+    </div>
+    <div id="challenge">
+      <h3>Answer the question:</h3>
+      <p id="question">What is the most important skill for a software engineer?</p>
+      <button onclick="submitAnswer('Creativity')">Creativity</button>
+      <button onclick="submitAnswer('Leadership')">Leadership</button>
+      <button onclick="submitAnswer('Problem Solving')">Problem Solving</button>
+      <button onclick="submitAnswer('Networking')">Networking</button>
+    </div>
+    <div id="leaderboard">
+      <h2>Leaderboard</h2>
+      <ol id="leaderboard-list"></ol>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
